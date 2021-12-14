@@ -1,10 +1,12 @@
-import React from "react";
-import { Card, Col, Container, Image, Row } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Card, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import * as color from "../utils/colors";
 import TableC from "./Table";
 
-const Body = () => {
+const Body = ({ transData, netAmt, month }) => {
+  const [data, setData] = useState(transData);
+
   return (
     <Container fluid className="p-0">
       <Container fluid style={{ backgroundColor: color.Secondary }}>
@@ -29,7 +31,7 @@ const Body = () => {
                     maxWidth: "auto",
                   }}
                 >
-                  December
+                  {month}
                 </Card.Title>
                 <Card.Text>2021</Card.Text>
               </Card>
@@ -38,35 +40,9 @@ const Body = () => {
         </Container>
       </Container>
       <Container>
-        <TableC />
+        <TableC transData={data} netAmt={netAmt} />
       </Container>
     </Container>
-
-    // <Container fluid className="p-0">
-    //   <Row
-    //     style={{ alignItems: "center", backgroundColor: color.Secondary }}
-    //     className="p-2"
-    //   >
-    //     <Col md={{ span: 3, offset: 2 }}>
-    //       <h3 style={{ color: color.Primary, fontWeight: "bold" }}>
-    //         Transaction History
-    //       </h3>
-    //     </Col>
-    //     <Col md={{ span: "auto", offset: 3 }}>
-    //       <Card className="py-1 px-4 z-depth-6 shadow">
-    //         <Card.Title
-    //           style={{ fontWeight: "bold", color: color.Primary, fontSize: 22 }}
-    //         >
-    //           August
-    //         </Card.Title>
-    //         <Card.Text>2021</Card.Text>
-    //       </Card>
-    //     </Col>
-    //   </Row>
-    //   <div style={{ backgroundColor: color.Back, paddingInline: 20 }}>
-    //     <Table />
-    //   </div>
-    // </Container>
   );
 };
 

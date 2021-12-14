@@ -1,17 +1,5 @@
-import React, { useState, useRef } from "react";
-import {
-  Button,
-  Card,
-  Col,
-  Container,
-  Dropdown,
-  Form,
-  FormControl,
-  Image,
-  InputGroup,
-  Row,
-  Table,
-} from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Container, FormControl, InputGroup, Table } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import * as color from "../utils/colors";
 import {
@@ -22,51 +10,10 @@ import {
   FaAngleRight,
 } from "react-icons/fa";
 
-const TableC = () => {
+const TableC = ({ transData, netAmt }) => {
   const [selCheck, setselCheck] = useState(false);
   const [checkNum, setcheckNum] = useState(0);
-  const [data, setData] = useState([
-    {
-      check: false,
-      id: 1,
-      Name: "Akash",
-      w_amt: 1000,
-      c_amt: 10,
-      n_amt: 1000,
-    },
-    {
-      check: false,
-      id: 2,
-      Name: "Arnav",
-      w_amt: 2000,
-      c_amt: 50,
-      n_amt: 2500,
-    },
-    {
-      check: false,
-      id: 3,
-      Name: "Ashwath",
-      w_amt: 4000,
-      c_amt: 40,
-      n_amt: 4000,
-    },
-    {
-      check: false,
-      id: 4,
-      Name: "Bavesh",
-      w_amt: 2500,
-      c_amt: 18,
-      n_amt: 3000,
-    },
-    {
-      check: false,
-      id: 5,
-      Name: "Harsha",
-      w_amt: 3000,
-      c_amt: 10,
-      n_amt: 3500,
-    },
-  ]);
+  const [data, setData] = useState(transData);
 
   const selectAll = () => {
     var chec = !selCheck;
@@ -106,7 +53,8 @@ const TableC = () => {
           </select>
           <span style={{ marginLeft: 15 }}>Total money to Pay </span>
           <span style={{ color: color.Primary, fontWeight: "bold" }}>
-            {"\u20B9"}6000
+            {"\u20B9"}
+            {netAmt}
           </span>
         </div>
         <hr className="m-0" />
@@ -158,6 +106,7 @@ const TableC = () => {
         </thead>
         <tbody>
           {data.map((type, index) => {
+            console.log(type);
             if (type.check) {
               return (
                 <tr key={index}>

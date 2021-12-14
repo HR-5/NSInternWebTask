@@ -1,41 +1,9 @@
-import React, { useState, useEffect } from "react";
-import {
-  Col,
-  Container,
-  Image,
-  Navbar,
-  NavDropdown,
-  Row,
-} from "react-bootstrap";
+import React from "react";
+import { Container, Navbar, NavDropdown, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import * as color from "../utils/colors";
 
-const Header = () => {
-  const [name, setName] = useState("");
-  const [companyName, setcompanyName] = useState("");
-
-  const getData = async () => {
-    try {
-      const response = await fetch(
-        "https://api.ninjasalary.com/get-dummy-dashboard-data/"
-      );
-      const json = await response.json();
-      if (json.status) {
-        const data = json.data;
-        setName(
-          data.first_name + " " + data.middle_name + " " + data.last_name
-        );
-        setcompanyName(data.company_name);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
+const Header = ({ name, companyName }) => {
   return (
     <Navbar style={{ background: color.Primary }}>
       <Container>
@@ -55,6 +23,7 @@ const Header = () => {
               align="end"
               title={<span style={{ color: "white" }}>Hello, {name}</span>}
               id="nav-dropdown"
+              className="p-0"
             >
               <NavDropdown.Item href="/">My Profile</NavDropdown.Item>
               <NavDropdown.Item href="/">My Transactions</NavDropdown.Item>
